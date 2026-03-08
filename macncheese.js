@@ -1,33 +1,25 @@
 elements.macaroni = {
-    color: "#f5d142",
-    behavior: behaviors.POWDER, // Acts like a powder (falls down)
+    color: "#f5d061",
+    behavior: behaviors.POWDER,
     category: "food",
     state: "solid",
+    reactions: {
+        "water": { elem1: "macaroni", elem2: null, chance: 0.05 },
+        "cheese": { elem1: "mac_n_cheese", elem2: null, tempMin: 60 },
+    },
     tempHigh: 100,
-    stateHigh: "macaroni", // Remains macaroni unless reacted
+    stateHigh: "mac_n_cheese",
 };
 
 elements.mac_n_cheese = {
     color: "#ffb300",
-    behavior: behaviors.STURDYPOWDER, // Slightly thicker movement
-    category: "food",
-    state: "solid",
-};
-
-// Define the multi-step reaction
-elements.macaroni.reactions = {
-    "water": {
-        "with1": "cheese",
-        "next": "mac_n_cheese_unheated" // Intermediate state
-    }
-};
-
-// Heat requirement: Transforms to Mac n Cheese when temperature rises
-elements.mac_n_cheese_unheated = {
-    color: "#e3c57d",
     behavior: behaviors.POWDER,
     category: "food",
-    hidden: true,
-    tempHigh: 60, // Transformation temperature
-    stateHigh: "mac_n_cheese" 
+    state: "solid",
+    temp: 70,
+    viscosity: 40,
+    reactions: {
+        "head": { elem1: null, elem2: "head", chance: 0.2 },
+        "body": { elem1: null, elem2: "body", chance: 0.1 },
+    },
 };
